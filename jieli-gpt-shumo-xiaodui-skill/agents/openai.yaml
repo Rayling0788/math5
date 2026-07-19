@@ -1,0 +1,4 @@
+interface:
+  display_name: "街里gpt数模小队skill"
+  short_description: "街里gpt数模小队的多 Agent 数学建模工作流"
+  default_prompt: "Use $jieli-gpt-shumo-xiaodui-skill to assign separate coordinator, modeler, coder, writer, and verifier agents and complete this mathematical modeling task end to end."
