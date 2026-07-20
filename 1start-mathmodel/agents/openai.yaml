@@ -1,0 +1,4 @@
+interface:
+  display_name: "MathModelAgent"
+  short_description: "Multi-agent modeling with MATLAB evidence and paper QA"
+  default_prompt: "Use $1start-mathmodel to solve this competition problem with separate agents, MATLAB-based reproducible evidence figures, a Chinese LaTeX paper, and final verification."
