@@ -402,6 +402,12 @@ default_internal_terms = [
     "ANALYSIS_MODELING_REPORT.md",
     "PROBLEM_ANALYSIS.md",
     "CLAUDE.md",
+    "claim_registry",
+    "figure_manifest",
+    "workflow_edges",
+    "workflow_state",
+    "PAPER_USABLE",
+    "FAILED_DIAGNOSTIC",
     "figures/*.json",
     "_tmp/",
 ]
@@ -414,6 +420,9 @@ if all_results:
     internal_terms.append(all_results.name)
 internal_terms = sorted(set(term for term in internal_terms if term))
 internal_re = re.compile("|".join(re.escape(term) for term in internal_terms)) if internal_terms else None
+vague_self_eval_re = re.compile(
+    r"利用数学知识|理论基础扎实|结果合理|符合客观事实|效果较好|具有一定意义"
+)
 
 typ_files = unique_paths([main] + section_files + ([refs] if refs and refs.exists() else []) + sorted(paper.glob(section_ext)))
 file_texts = []
@@ -432,11 +441,20 @@ for path in typ_files:
         fail(f"placeholder text remains in {path_rel}")
 
     is_appendix = path.name.startswith("A_") or "appendix" in path.name.lower()
+    is_references = bool(refs and path.resolve() == refs.resolve())
     if not no_internal_check and internal_re and internal_re.search(text):
         if is_appendix:
             warn(f"internal workflow term appears in appendix: {path_rel}")
         else:
             fail(f"internal workflow term leaked into paper text: {path_rel}")
+
+    if not is_appendix and not is_references:
+        vague_phrases = sorted(set(vague_self_eval_re.findall(text)))
+        if vague_phrases:
+            warn(
+                "unsupported self-evaluation phrase requires evidence-based rewrite in "
+                f"{path_rel}: {', '.join(vague_phrases)}"
+            )
 
     if path in section_files:
         body = text.strip()
@@ -514,8 +532,10 @@ else:
     image_re = re.compile(r'\\includegraphics\s*(?:\[[^\]]*\])?\s*\{([^}]+)\}')
 for path, text in file_texts:
     for ref in image_re.findall(text):
-        target = (path.parent / ref).resolve()
-        if not target.exists():
+        candidates = [(path.parent / ref).resolve()]
+        if figures_dir:
+            candidates.append((figures_dir / ref).resolve())
+        if not any(target.exists() for target in candidates):
             fail(f"referenced image does not exist from {rel(path)}: {ref}")
 
 if figures_dir and figures_dir.exists():

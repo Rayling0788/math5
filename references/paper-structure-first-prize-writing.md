@@ -64,6 +64,33 @@ For each question, compare only credible alternatives. Selection must be driven 
 
 Every selected model must record its applicability conditions, main advantage, main limitation, alternative considered, rejection reason, and validation plan in the modeling decision log before paper drafting.
 
+## Interpretation And Scenario Discipline
+
+Do not treat every possible reading as a full parallel model. First identify exactly which semantic choice changes the mathematics: the comparison object, included path or cost components, fixed endpoints, movable entry/exit locations, parameter freedom, time origin, or feasible region. Select one primary reading when the statement, figures, attachments, contest convention, dependencies, or a quick derivation clearly support it, and record why the other reading is not adopted.
+
+If two readings remain comparably defensible and can reverse the main qualitative answer or materially change a recommendation, both must be disclosed. The primary reading receives the complete executed solution. The alternative may use another executed scenario, but a concise analytical proof, invariance argument, or counterexample is sufficient when it fully determines the alternative conclusion. Only separately executed numerical branches require separate scenario keys. Any downstream result that consumes a changed path, geometry, objective, or constraint must remain within the same scenario.
+
+For a route-optimization ambiguity, a good disclosure states, for example: under the reading that entry and exit positions may move inside the turning region while the radius ratio remains fixed and “route length” means only the connecting arcs, the arc length can be shortened; under the reading that turning starts at fixed boundary points while the radius ratio may vary, changing the ratio may leave total arc length invariant, so the claimed optimization disappears. This is a pattern for exposing assumptions, not a license to reuse either conclusion without derivation.
+
+In the paper, introduce the primary reading before its formulas. Put a consequential alternative in a short note, interpretation-sensitivity paragraph, or dedicated subsection using the form `在口径 A 下……；若按口径 B 理解，则……`. Never combine objective values from different definitions in one ranking or recommendation.
+
+## Chinese Narrative Style
+
+Write each substantive subsection as a connected argument:
+
+1. state the immediate purpose and the physical, geometric, statistical, or decision picture;
+2. explain why the chosen relation or model represents that picture;
+3. introduce the mathematical expression and define its variables where they first matter;
+4. describe the executed solution method at the level needed for reproducibility;
+5. report the result with unit, scenario, and applicability;
+6. interpret the result and close with validation, sensitivity, or a limitation.
+
+Introduce a formula with its modeling purpose, and follow it with its physical meaning rather than leaving equations as isolated derivations. Introduce a figure by the question it helps answer, then explain the evidence it provides. Use transitions based on cause, condition, contrast, and consequence; avoid a mechanical chain of `首先`、`其次`、`最后` or repeated openings such as `如图所示`.
+
+Translate internal evidence records into ordinary academic Chinese. Do not expose `claim`, `accepted`, `scenario_key`, `PAPER_USABLE`, `FAILED_DIAGNOSTIC`, file paths, Agent ownership, workflow state, freezing, gates, retries, or debugging. Avoid unsupported self-evaluation such as `利用数学知识`、`理论基础扎实`、`结果合理`、`符合客观事实`、`效果较好` or `具有一定意义`; name the actual residual, comparison, constraint, sensitivity, or observed mechanism instead.
+
+In a Chinese abstract, retain one principal answer and one decisive validation item per question. Move secondary residuals, tolerances, intermediate optima, and full-precision diagnostics to the body or appendix. If interpretations lead to different conclusions, name their conditions explicitly rather than stacking unexplained numbers.
+
 ## Blocking Acceptance Rules
 
 Final verification must fail when any of the following holds:
@@ -74,3 +101,7 @@ Final verification must fail when any of the following holds:
 - question-specific assumptions appear as separate top-level sections or material assumptions are introduced later without registration;
 - model choice is asserted without alternatives, evidence, rationale, applicability, and validation;
 - abstract results conflict with the accepted claim registry or omit required units/scenarios.
+- a selected interpretation silently changes the comparison object, fixed endpoints, movable boundary, parameter freedom, or cost scope;
+- comparably defensible interpretations can reverse the main answer, but the alternative is neither disclosed nor resolved by an executed scenario or sufficient analytical argument;
+- downstream values combine incompatible interpretation scenarios;
+- submission prose exposes internal evidence/workflow vocabulary or relies on unsupported self-evaluation instead of named evidence.

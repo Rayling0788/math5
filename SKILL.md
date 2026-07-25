@@ -90,6 +90,14 @@ Store canonical quantitative and categorical conclusions in `results/claim_regis
 
 Label each reported solution as `strict_feasible`, `validated_estimate`, `scenario_result`, or `ideal_upper_bound`. Never present an ideal boundary or reduced-model estimate as an implementable optimum. Use stable scenario keys across result tables, figures, captions, and prose.
 
+### Interpretation Discipline
+
+Before fixing an objective or feasible set, identify wording that can reasonably change the comparison object, fixed endpoints, movable boundary, parameter freedom, time origin, cost scope, or downstream path. Prefer the interpretation best supported by the literal statement, contest convention, supplied figures/attachments, and dependencies between questions; do not silently replace the stated target with a self-defined “fair”, stricter, or more engineering-like target.
+
+A single primary interpretation is sufficient when the evidence clearly favors it or a quick derivation shows that alternatives do not materially change the answer. Record the alternative and the reason for rejecting it in the modeling decision log; a full duplicate solve is not required. If two interpretations remain comparably defensible and can reverse a qualitative answer or materially change a recommendation, disclose both. Use a full executed scenario for every interpretation needed by the final conclusion, but allow a bounded analytical proof, invariance argument, or counterexample to dispose of an alternative when that is sufficient. Give separately executed branches stable scenario keys and propagate each key to every downstream result that consumes the changed geometry, path, objective, or constraint.
+
+Keep this reasoning in the evidence system, then translate it into ordinary academic Chinese in the paper. Internal terms such as `claim`, `PAPER_USABLE`, “冻结”, “门禁”, “工作流状态”, Agent ownership, and retry notes must not appear in submission prose.
+
 Each computational question used in the final paper must eventually cover three visual evidence roles:
 
 - mechanism, geometry, input, or model structure;
@@ -147,6 +155,7 @@ Agents communicate through workspace artifacts, not hidden chat context. Keep ro
 - Do not accept hard-coded MATLAB drawings or snippets as implementation of search, fitting, ranking, or optimization. One driver must regenerate every core claim, table, and figure from declared inputs with assertions.
 - Do not accept an engineering paper whose MATLAB output consists only of generic data charts when parameterized geometry, materials, boundaries, discretization, layouts, or physical fields are central to the model.
 - Do not accept a modeling decision that jumps from attachment or formula to a chosen method without recording alternatives, evidence, rationale, risks, validation, and downstream effect in the decision log.
+- Do not accept an interpretation that silently changes the stated comparison object, fixed endpoints, movable boundary, parameter freedom, or cost scope. When comparably defensible interpretations can reverse the main answer, require explicit disclosure and either separate executed scenarios or a sufficient analytical proof for the non-primary branch.
 - Do not reuse a model outside its declared steady/dynamic, spatial, linearity, or boundary-condition regime without an explicit validity decision and replacement model.
 - Do not accept a computational question without its three visual evidence roles, unless the model report gives a specific and verified reason.
 - Do not accept MATLAB figures without their `.m` generator, source data, PDF, PNG preview, and manifest row.
@@ -156,6 +165,7 @@ Agents communicate through workspace artifacts, not hidden chat context. Keep ro
 - Do not accept unexplained correction factors, weights, fitted constants, or calibration coefficients without provenance, applicability, and sensitivity evidence.
 - Do not allow numbers, scenario keys, candidate IDs, or recommendation wording to disagree across structured outputs, registry rows, tables, figures, abstract, body, conclusions, and recommendations.
 - Do not expose internal paths, code/report filenames, Agent/process language, retry notes, or template examples in the submission paper.
+- Do not expose evidence-management vocabulary such as `claim`, `PAPER_USABLE`, `FAILED_DIAGNOSTIC`, “冻结”, “门禁”, or scenario-registry mechanics in the submission paper; rewrite them as model assumptions, applicability conditions, numerical verification, or sensitivity conclusions.
 - Do not describe `PAPER_USABLE` evidence as certified, construction-safe, code-compliant, experimentally verified, or universally optimal.
 - Do not accept a problem-analysis section that merges all questions into generic prose; every top-level question must have its own analysis subsection covering inputs/outputs, task essence, dependencies, difficulty, credible alternatives, selection rationale, and expected evidence.
 - Do not accept a Chinese abstract unless it has an opening overview and a separate prose paragraph for every top-level question, with the actual method, accepted result or result type, validation, and meaning.
