@@ -33,7 +33,89 @@ compressing all roles into one technical-report paragraph.
 
 Do not reduce style matching to vocabulary substitution. Match the organization of reasoning at paragraph and subsection scale.
 
-## 2. Preserve The Reference Paper's Useful Rhythm
+## 2. Put The Reader On A Visible Path
+
+Treat accessibility as part of mathematical rigor. A reader should never have to infer
+simultaneously what object is being studied, why an equation is valid, and what the
+solver does next. For every technical subsection, expose the reasoning in this order:
+
+```text
+本节要求求什么
+-> 先观察哪个具体对象或局部构型
+-> 已知量从哪里来，未知量是什么
+-> 根据哪条几何、物理或统计关系列式
+-> 公式中的量分别表示什么
+-> 该式把原问题转化成了什么待求量
+-> 按什么顺序计算
+-> 得到什么结果，结果说明什么
+```
+
+This is a reader path, not eight mandatory sentences. Short sections may combine
+adjacent steps, but may not skip the identity of the current object, the source of the
+relation, or the meaning of the output.
+
+### One paragraph, one step
+
+Let one paragraph cross one main reasoning boundary. Typical boundaries are
+`题意 -> 对象`、`对象 -> 方程`、`方程 -> 待求量`、`待求量 -> 算法`、
+`算法 -> 结果` and `结果 -> 解释`. Do not ask one paragraph to define the state,
+derive the recurrence, describe the optimizer, report the optimum, and validate it.
+Splitting a dense paragraph is useful only when each new paragraph receives a clear
+local purpose; do not turn prose into disconnected one-sentence fragments.
+
+### Formula handshake
+
+Every important displayed formula needs a three-part handshake:
+
+1. before it, name the concrete reason for writing it and the object to which it applies;
+2. in or immediately around it, keep symbols traceable to the figure, data, or previous relation;
+3. after it, state what is known, what is solved, and what the calculation enables next.
+
+Do not present several new equations as a wall and postpone all interpretation until the
+end. A short algebraic chain may remain together when every line transforms the same
+quantity, but introduce the chain with its purpose and close it with its computational
+meaning.
+
+### Concrete before general
+
+For recurrences, collisions, piecewise paths, and speed propagation, first explain one
+complete local case: one board, one adjacent handle pair, one candidate collision pair,
+one path junction, or one time step. State the known quantity and solve the next one.
+Only then replace the concrete labels with a uniform index and extend the relation to
+the whole chain or search domain. A model-summary block is a map after this explanation,
+not the reader's first encounter with the model.
+
+Use the actual object name as often as needed. Repeating `龙头前把手`、`后一把手` or
+`当前板凳` is clearer than alternating among `该对象`、`该状态`、`该变量` and
+`其`. Prefer visible actions such as `计算`、`比较`、`判断`、`代入`、`联立`、
+`沿路径向后寻找`、`退回上一步`、`缩小步长` and `得到`. Replace stacked abstract
+nouns with the object, action, condition, and consequence they conceal.
+
+### Explain an algorithm as actions first
+
+Before formal pseudocode or a flowchart, give one compact natural-language pass through
+the actual execution order: choose the initial value; calculate the current candidate;
+test the condition; if it fails, return to the previous feasible value; reduce the step;
+repeat; stop when the tolerance is met. Include only actions implemented by the code.
+The reader should be able to understand the algorithm after skipping the code appendix.
+
+### Reader-blockage check
+
+After each complex subsection, read it without relying on internal reports or source
+code and answer:
+
+- Who or what is being solved at this point?
+- Where did every known quantity come from?
+- Why is the displayed relation valid for this object?
+- What new quantity does the relation produce?
+- Why does the next calculation follow?
+- Do the points, lines, directions, and symbols in the figure match the prose exactly?
+- Can the algorithm still be followed if the pseudocode or MATLAB listing is skipped?
+
+If any answer is missing, repair the local passage before polishing vocabulary. This
+check takes priority over making the prose shorter.
+
+## 3. Preserve The Reference Paper's Useful Rhythm
 
 For a mechanism-heavy modeling question, normally separate the following roles:
 
@@ -72,7 +154,7 @@ A subsection title alone does not satisfy a role. Each role must contain the mat
 named by the title. Figures and tables belong to the role whose inference they support;
 do not gather all figures at the end of a chapter.
 
-## 3. Build Paragraphs As Reasoning Units
+## 4. Build Paragraphs As Reasoning Units
 
 Each paragraph should complete one local inference. Use the following sentence-group patterns flexibly.
 
@@ -147,7 +229,7 @@ Rewrite it by restoring the reference paper's reasoning order:
 
 The correction is structural, not a request to make every sentence longer.
 
-## 4. Frame Formulas Naturally
+## 5. Frame Formulas Naturally
 
 Before a displayed formula, state the immediate modeling purpose or the relation from which it follows. Prefer concrete leads such as:
 
@@ -167,7 +249,7 @@ After the formula, do at least one useful thing:
 
 Do not repeatedly write `由数学知识可知`、`容易得到` or `显然`. Name the actual theorem, constraint, geometry, or derivative. Do not explain trivial algebra line by line when it adds no modeling meaning.
 
-## 5. Use Transitions With Real Dependency
+## 6. Use Transitions With Real Dependency
 
 Words such as `首先`、`其次`、`接着`、`最后` are acceptable when they correspond to an actual dependency chain, especially in the abstract or algorithm overview. Avoid using them as empty numbering devices in every paragraph.
 
@@ -205,7 +287,7 @@ algorithm, result, and verification as four comma-separated clauses. The referen
 repeat `本文`、`因此` or the modeled object more often than polished journal prose; retain
 that explicitness when it improves the derivation, while avoiding mechanical repetition.
 
-## 6. Match Chapter-Specific Density
+## 7. Match Chapter-Specific Density
 
 ### Abstract
 
@@ -233,7 +315,7 @@ Separate `what was obtained` from `why it behaves that way`. Report the requeste
 
 Name a specific strength with its evidence, for example analytic velocity recursion avoiding integer-time differencing. Name a specific limitation with its consequence, for example neglecting vertical tilt makes the conclusion valid only for planar motion. Do not write `理论基础扎实`、`考虑范围广` or `具有推广价值` without an object and evidence.
 
-## 7. Figures, Tables, And Equations Must Belong To The Prose
+## 8. Figures, Tables, And Equations Must Belong To The Prose
 
 Before a figure or table, tell the reader what relation or comparison to inspect. After it, state the conclusion supported by the visible geometry or data. Avoid consecutive figures with only captions between them.
 
@@ -241,7 +323,7 @@ For a geometry subsection, verify the local order `对象与条件 -> 局部构�
 
 For a long result table, introduce its extraction rule and units, then discuss one or two representative rows or trends. Do not narrate every cell.
 
-## 8. Style Acceptance Checklist
+## 9. Style Acceptance Checklist
 
 When the user explicitly asks to follow a reference paper, compare the draft against the style profile on these dimensions:
 
@@ -263,11 +345,14 @@ Also compare the final draft directly with the recorded reference profile:
 - the algorithm order in prose matches the executed order;
 - the requested answer appears before diagnostic detail;
 - validation is interpreted instead of being appended as a list of small residuals.
+- each complex subsection passes the reader-blockage check in Section 2;
+- a model-summary block does not replace the first concrete derivation;
+- no unexplained wall of formulas or chain of abstract report nouns remains.
 
 If two or more of these checks fail, rewrite the chapter before compilation. Do not
 classify a clear structural mismatch as a cosmetic warning.
 
-## 9. Two-Pass Style Transformation
+## 10. Two-Pass Style Transformation
 
 Use two passes when the user explicitly asks to match a reference paper.
 

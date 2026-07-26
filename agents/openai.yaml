@@ -1,7 +1,7 @@
 interface:
   display_name: "数学建模增量交付"
-  short_description: "MATLAB 建模、证据型图表、中文论文文风校准和终稿验收"
-  default_prompt: "使用 $1start-mathmodel 完成 MATLAB 建模与中文论文；论文前部设置一张总体技术路线图，局部流程图仅用于必要的循环或分支算法；按论证需要组合正视构型、真实 3D、数据结果和验证图，在代表性推导后汇总核心方程，并在摘要中明确模型、算法、关键约束、结果与验证，最后执行增量求解和终稿验收。"
+  short_description: "MATLAB 建模、证据型图表、易读中文论文和终稿验收"
+  default_prompt: "使用 $1start-mathmodel 完成 MATLAB 建模与中文论文，设置一张总体技术路线图并只为必要的循环或分支保留局部流程图，按论证需要组合正视构型、真实 3D、数据结果和验证图，复杂推导先讲清一个具体对象再推广为一般模型，并用前导—公式—落地说明重要关系，最后完成摘要与终稿验收。"
 
 policy:
   allow_implicit_invocation: true
