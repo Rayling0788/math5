@@ -291,7 +291,28 @@ that explicitness when it improves the derivation, while avoiding mechanical rep
 
 ### Abstract
 
-Begin with one compact overview. For each question, use one paragraph beginning with `针对问题一`、`针对问题二` or an equivalent phrase. Explicitly name the actual model or mathematical structure, the executed solution algorithm or numerical method, and the objective or decisive constraints before reporting one principal result and one decisive validation or interpretation. A short sequence such as `先……，再……，进而……` is appropriate when it mirrors the computation. Avoid the empty substitute `建立模型并用 MATLAB 求解`.
+Treat the abstract as a miniature solution narrative, not a compressed registry or a shortened introduction. Calibrate it separately from the body. From each supplied reference abstract, record: what the opening paragraph does; how many sentences each question receives; which sentence states the task, model transformation, execution order, result, and validation; where the principal number appears; and how the paragraph closes. Learn this role sequence, not the reference's numerical claims or possible modeling errors.
+
+Use one compact opening of roughly one or two sentences. Name the actual research object, overall task, and shared modeling thread that connects the questions. Do not spend this paragraph on historical background, generic significance, a list of software, or a preview of every numerical answer.
+
+Give every top-level question its own paragraph, normally beginning with `针对问题一`、`针对问题二` or an equivalent phrase. A useful paragraph usually contains two to four sentences with distinct roles:
+
+1. state what this question must determine and name the mathematical structure used;
+2. mirror the real calculation with a short action chain such as `先……，再……，进而……`, explaining what the model or algorithm actually computes;
+3. introduce the objective or decisive hard constraints at the point where they govern a search or decision;
+4. report the direct answer group with units and necessary scenario, then normally close with one decisive validation, trend, interpretation, or applicability statement.
+
+These are sentence roles, not fields to force into one sentence. Split the paragraph when model, algorithm, constraints, result, and validation would otherwise become a long comma chain. Pair each model or method name with its function: say which physical, geometric, statistical, or decision relation it turns into a computable quantity. Avoid the empty substitute `建立模型并用 MATLAB 求解` and avoid algorithm-name stacks that never reveal the calculation order.
+
+Prefer the concrete relation to an unexplained proof label. Phrases such as `由某不变量可知`、`受上述约束控制` or `根据几何性质` are too opaque in an abstract unless the same sentence names what is fixed or compared and what follows from it. Replace them with the shortest answer-bearing relation, for example `起、终点固定时，两弧总长与半径比无关，因此仅改变半径比不能缩短路线`. Keep the full derivation in the body, but do not make the abstract reader guess what the omitted argument proves.
+
+Keep result density selective. Retain one direct answer group for each question: several positions, velocities, design values, or categories may stay together when the problem explicitly asks for them and they form one conclusion. Add one representative time, candidate, state, or trend only when it makes the requested output concrete. Include units, rounding, scenario, and boundary-versus-recommendation wording exactly as used in the body. Move full-precision residuals, several tolerances, intermediate extrema, and diagnostic lists to the results or verification section. Normally choose one validation, interpretation, or limitation for closure unless uncertainty itself is the question.
+
+Shared geometry, data scope, or assumptions may be stated once in the opening; a question paragraph repeats only conditions that change that question's numerical answer or qualitative conclusion. When an interpretation changes the answer, name the primary interpretation before its result and dispose of the alternative in one concise conditional sentence when possible: `在……口径下……；若按……理解，则……`. This answer-changing note may accompany one ordinary feasibility check; do not merge values produced under different objectives or path definitions.
+
+After drafting, test each paragraph together with the opening, but without consulting the body: can a reader state what was sought, how the model transformed it, what sequence was executed, what answer was obtained, and which conditions change it? If any part must be guessed, revise only that paragraph. Also test the whole abstract for rhythm: the opening should not repeat the first question, consecutive paragraphs should not all use identical sentence templates, and validation should not overwhelm the answer. Treat these as human or LLM semantic-review items; automated structure checks can verify paragraph coverage and numeric consistency but cannot reliably judge action order or list-like prose.
+
+Respect the official word or page limit. When space is tight, compress shared methods in the opening and remove secondary diagnostics before deleting the task, action chain, direct answer, or necessary scenario from a question paragraph. Do not merge answers from different top-level questions merely to save space.
 
 End a Chinese abstract with one keyword line. Bold both the `关键词：` label and every keyword, using the selected contest template's separator. Do not bold arbitrary result phrases throughout the abstract merely to imitate the keyword line.
 

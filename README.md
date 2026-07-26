@@ -1,6 +1,6 @@
 # MathModel Agent
 
-数学建模竞赛工作流技能的统一版本仓库。`main` 与 `v8.0.0` 为当前版本，历史版本通过版本分支和 Git 标签保留。
+数学建模竞赛工作流技能的统一版本仓库。`main` 与 `v9.0.0` 为当前版本，历史版本通过版本分支和 Git 标签保留。
 
 | 版本 | 版本分支 | Git 标签 | 原始仓库 |
 | --- | --- | --- | --- |
@@ -12,17 +12,18 @@
 | V6 | `version/v6` | `v6.0.0` | [math5](https://github.com/Rayling0788/math5) |
 | V7 | `version/v7` | `v7.0.0` | [math5](https://github.com/Rayling0788/math5) |
 | V8 | `version/v8` | `v8.0.0` | [math5](https://github.com/Rayling0788/math5) |
+| V9 | `version/v9` | `v9.0.0` | [math5](https://github.com/Rayling0788/math5) |
 
 ## 获取指定版本
 
 ```bash
-git clone --branch version/v8 https://github.com/Rayling0788/math5.git
+git clone --branch version/v9 https://github.com/Rayling0788/math5.git
 ```
 
 也可以克隆仓库后签出固定标签：
 
 ```bash
-git checkout v8.0.0
+git checkout v9.0.0
 ```
 
 Codex 技能入口位于仓库根目录的 `SKILL.md`。
