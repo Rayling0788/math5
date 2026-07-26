@@ -57,9 +57,15 @@ Use MATLAB primitives such as `patch`, `rectangle`, `plot3`, `surf`, `trisurf`, 
 
 Every model view must save its geometry/material/field data, generator `.m`, vector PDF, PNG preview, scenario key, regime, model level, and claim. Labels must identify materials, units, boundaries, loads, and critical points at paper print size.
 
+For a geometry or mechanism schematic, construct the drawing from the same arrays and parameter values used by the solver. Prefer the visual grammar of a careful textbook diagram: a clear object outline or section, centerline/path, named endpoints and contact points, local tangent/normal or other basis vectors, sparse dimension arrows with units, and one highlighted relation that leads directly to the adjacent formula. Use solid lines for modeled bodies, lighter lines for construction geometry, and a restrained accent color only for the active constraint or critical pair. Keep labels horizontal when possible and move them away from arrowheads and boundaries.
+
 ## 5. MATLAB and DrawIO Division
 
 Use MATLAB for figures whose geometry, scale, materials, boundaries, layouts, or fields depend on model parameters. Use DrawIO for high-level technical routes, logical dependencies, algorithm branches, and conceptual architecture. A clean DrawIO schematic does not replace a parameterized MATLAB geometry or field plot; a MATLAB plot does not replace an algorithm flowchart when branching logic matters.
+
+Use LaTeX/TikZ for exact symbolic constructions that do not depend on computed coordinates. When the user permits additional software and a complex physical assembly genuinely benefits from CAD-like surfaces, sections, or exploded views, a reproducible CAD/3-D tool may supplement MATLAB, but it must import or regenerate the same accepted dimensions and retain editable source. It may not replace MATLAB computation, alter geometry by eye, or imply experimental/high-fidelity validation merely through realistic rendering.
+
+Distinguish three outputs explicitly: an analytical schematic explains a formula, a parameterized model view shows the computed geometry or state, and a photorealistic rendering only communicates appearance. Never call the third one a model validation. Prefer orthographic or sectional views when the decisive relation is planar; use a perspective view only for real depth, and provide a companion front/top/section view when perspective obscures alignment or contact.
 
 ## 6. Visual Continuity Per Question
 
@@ -81,3 +87,4 @@ Block delivery when any applies:
 - a schematic uses dimensions or materials different from the solver;
 - model figures are hand-drawn or hard-coded independently of accepted parameters;
 - the rendered figure omits units, material identity, boundary meaning, extrema, or critical constraints.
+- a geometry schematic omits the local coordinate/basis, key dimensions, point labels, or modeled relation needed to understand the adjacent derivation.

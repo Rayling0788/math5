@@ -1,6 +1,6 @@
 ---
 name: 1start-mathmodel
-description: "交付优先、支持增量重跑的多 Agent 数学建模竞赛工作流。用于 CUMCM、MCM、ICM、MathorCup 及类似赛题，以 MATLAB 建模计算与科研绘图、中文 LaTeX/Typst 论文和独立验收形成可复现证据链；适合完整解题、已有项目续做、局部修错、加速论文交付和可选高保真认证。"
+description: "交付优先、支持增量重跑的多 Agent 数学建模竞赛工作流。用于 CUMCM、MCM、ICM、MathorCup 及类似赛题，以 MATLAB 建模计算与科研绘图、中文 LaTeX/Typst 论文、参考范文文风校准和独立验收形成可复现证据链；适合完整解题、已有项目续做、论文重写、局部修错、加速交付和可选高保真认证。"
 ---
 
 # MathModelAgent
@@ -98,6 +98,16 @@ A single primary interpretation is sufficient when the evidence clearly favors i
 
 Keep this reasoning in the evidence system, then translate it into ordinary academic Chinese in the paper. Internal terms such as `claim`, `PAPER_USABLE`, “冻结”, “门禁”, “工作流状态”, Agent ownership, and retry notes must not appear in submission prose.
 
+### Reference-Paper Style Calibration
+
+When the user supplies a reference paper or asks to match a specific Chinese writing style, inspect representative passages before WriterAgent drafts the body. Extract the reference's subsection granularity, paragraph rhythm, transition logic, formula lead-ins, representative-derivation pattern, result-analysis order, and evaluation tone. Follow `references/chinese-paper-language-style.md`; record the compact style profile in the Writer handoff or modeling decision log, and calibrate one substantive subsection before expanding the style across the paper.
+
+Match reasoning structure rather than isolated phrases. Preserve factual correctness and evidence discipline: do not copy the reference's numerical results, unsupported evaluations, modeling mistakes, or unverified algorithms merely to resemble its language.
+
+For an explicit style-matching request, use a two-pass rewrite: first restore the reference's section roles and local derivation rhythm, then calibrate sentence transitions and tone. Preserve or increase meaningful subsection granularity; never collapse model construction, solution, requested result, and verification into one polished subsection. Forward-test one complete computational question after a substantial style-rule change. A forward test that only changes vocabulary or connective words fails even when its mathematics is correct.
+
+For a mechanism-heavy question, end the derivation with a visible `模型汇总` block before the numerical-solution subsection. Group only the equations actually consumed by the solver under semantic labels such as geometry/path, state, objective, constraints, recursion, and boundary conditions. State the unknowns and index ranges after the block. Do not replace the representative derivation with an unexplained wall of equations, and do not repeat every intermediate identity.
+
 Each computational question used in the final paper must eventually cover three visual evidence roles:
 
 - mechanism, geometry, input, or model structure;
@@ -110,9 +120,15 @@ A well-designed multi-panel figure may cover several roles, but each panel must 
 
 Plan the paper's visual language during modeling, not after the numerical work is finished. If the user supplies reference figures, inspect them early and extract transferable choices such as 3-D viewpoint, structural cutaway, surface mesh, field coloring, multi-panel composition, and information hierarchy. Adapt those choices to the actual model and data; do not copy labels, values, or decorative geometry from the reference.
 
+Treat a reference figure as a source of visual grammar, not as a checklist of objects or panels to reproduce. Learn how it makes an abstract relation inspectable: choose a front or sectional view, draw the true object outline, isolate the active local relation, distinguish primary and auxiliary geometry, and coordinate annotations with the derivation. Then decide independently which paper claims need that treatment. Do not create one figure for every construction shown in the reference, and do not force the same construction style onto unrelated questions.
+
 For each major computational question, consider whether a parameterized 3-D structure, mechanism schematic, response surface, feasible-region surface, spatial field, or coordinated multi-view figure would explain the model better than a basic line or bar chart. Prefer publication-grade MATLAB figures that expose geometry, variables, constraints, and result variation together. Every advanced visual must still be generated from the accepted model parameters or outputs and must add analytical meaning; visual complexity alone is not evidence.
 
-Create one overall modeling workflow diagram by default after the question dependency graph and model contracts stabilize. Place it near the beginning of the paper, normally in the opening part of `问题分析` after the overall approach and before the per-question analysis subsections. Show the real chain from problem data and attachments through preprocessing, Q1--Qn models, cross-question dependencies, validation, and final decision; do not use a generic template flowchart unrelated to the executed workflow. Use `4drawio` for a non-data technical-route diagram, or MATLAB when the workflow is naturally parameterized, and retain the editable source plus PDF/PNG exports. Verify arrow direction, Chinese text, node spacing, and readability at the compiled-paper size.
+Build the final visual argument by combining complementary figure types. Use an orthographic analytical construction for a local formula or contact relation, a data plot for a computed trend or numerical comparison, and a 3-D view only when its third coordinate is a real variable and reveals a relation that two dimensions cannot. These are complementary evidence roles, not mandatory panels in every question; merge them into a coordinated multi-view figure only when the panels share a common claim, scale, or state.
+
+For curved-path, linkage, contact, or tangent geometry, first classify the figure as numerical or analytical. Use MATLAB when the body pose, clearance, field, or dimensions are computed results. When the figure only expresses a symbolic geometric relation and a MATLAB rendering would look like a simulation plot, prefer reproducible LaTeX/TikZ linework. In either case show the true relation: rigid-body outline, active path, indexed points, junction and circle center, motion direction, and dashed radii or auxiliary triangles used by the adjacent formula. Use an orthographic local frame, a tight crop, and a clear line hierarchy; do not force 3-D or global axes into a textbook-style derivation figure.
+
+Create one overall modeling workflow diagram after the dependency graph stabilizes and place it near the start of `问题分析`. Do not assign one flowchart to every question by default. Add a local algorithm flow only when the prose contains a genuine iteration, branch, fallback, or multi-stage decision that is materially easier to read as a diagram; place it beside the corresponding algorithm subsection, not as a decorative chapter opener. Prefer equations for linear recursions, MATLAB geometry for mechanisms, and data plots for numerical conclusions. Use `4drawio` for logical routes and branching algorithms, and MATLAB for parameterized geometry or model mechanisms. Retain editable source plus PDF/PNG exports and verify arrow direction, Chinese text, spacing, and final-size readability.
 
 ## MATLAB Policy
 
@@ -121,6 +137,8 @@ When the user requests MATLAB, or the task is engineering, optimization, dynamic
 Require reproducible `.m` entry scripts, fixed random seeds where applicable, saved source data (`.mat` or `.csv`), structured result exports, vector PDF figures, 300 dpi PNG previews, explicit Chinese fonts for Chinese papers, complete units/legends/colorbars, and a run command. Generate geometry, response surfaces, fields, convergence, constraints, residuals, sensitivity, or time-series plots from actual model parameters and outputs, not hand-drawn approximations.
 
 For engineering tasks, MATLAB must visualize the model itself where meaningful: coordinate system and dimensions, candidate structures or material-property space, heat sources/loads, initial and boundary conditions, mesh/stencil or computational domain, final layout, field extrema, and validation. Data-summary plots alone do not satisfy model visualization.
+
+For geometric or mechanism models, include at least one publication-style MATLAB schematic built from the same parameters as the solver. Prefer clean linework or restrained fills; show the true object outline or section, centerline/path, named key points, local tangent/normal or other basis vectors, dimension arrows with units, and the exact contact, load, boundary, or constraint relation used in the derivation. Keep labels horizontal when possible and route arrows away from text. A schematic is analytical evidence, not decoration.
 
 ## Handoff Contract
 
@@ -157,7 +175,9 @@ Agents communicate through workspace artifacts, not hidden chat context. Keep ro
 - Do not accept a modeling decision that jumps from attachment or formula to a chosen method without recording alternatives, evidence, rationale, risks, validation, and downstream effect in the decision log.
 - Do not accept an interpretation that silently changes the stated comparison object, fixed endpoints, movable boundary, parameter freedom, or cost scope. When comparably defensible interpretations can reverse the main answer, require explicit disclosure and either separate executed scenarios or a sufficient analytical proof for the non-primary branch.
 - Do not reuse a model outside its declared steady/dynamic, spatial, linearity, or boundary-condition regime without an explicit validity decision and replacement model.
-- Do not accept a computational question without its three visual evidence roles, unless the model report gives a specific and verified reason.
+- Do not accept a computational question whose mechanism, principal result, and validation evidence are absent without a specific reason. These are evidence roles, not a required count of separate figures, and they do not imply a per-question flowchart. Use the single overall roadmap for cross-question dependencies; require a local algorithm flow only when a genuine loop, branch, fallback, multi-start selection, or stopping decision is materially clearer as a diagram than as equations and prose.
+- Do not accept a mechanism-heavy paper chapter that derives several equation families but never provides a compact, labeled model-summary block before numerical solution.
+- Do not accept a geometry-heavy paper whose MATLAB figures omit the local construction actually used in the derivation. A generic full-path overview cannot replace a close-up showing the rigid body, named points, center or tangent reference, motion arrow, and auxiliary distance relations.
 - Do not accept MATLAB figures without their `.m` generator, source data, PDF, PNG preview, and manifest row.
 - Do not accept figures with clipped labels, unreadable Chinese, misleading axes, arrow/text overlap, or unexplained visual encodings.
 - Do not admit figures containing `####`, mojibake, duplicate glyphs, clipped final-size labels, or failed diagnostic content into the paper.
@@ -168,7 +188,7 @@ Agents communicate through workspace artifacts, not hidden chat context. Keep ro
 - Do not expose evidence-management vocabulary such as `claim`, `PAPER_USABLE`, `FAILED_DIAGNOSTIC`, “冻结”, “门禁”, or scenario-registry mechanics in the submission paper; rewrite them as model assumptions, applicability conditions, numerical verification, or sensitivity conclusions.
 - Do not describe `PAPER_USABLE` evidence as certified, construction-safe, code-compliant, experimentally verified, or universally optimal.
 - Do not accept a problem-analysis section that merges all questions into generic prose; every top-level question must have its own analysis subsection covering inputs/outputs, task essence, dependencies, difficulty, credible alternatives, selection rationale, and expected evidence.
-- Do not accept a Chinese abstract unless it has an opening overview and a separate prose paragraph for every top-level question, with the actual method, accepted result or result type, validation, and meaning.
+- Do not accept a Chinese abstract unless it has an opening overview and a separate prose paragraph for every top-level question, explicitly naming the model, solution method, decisive objective or constraints, accepted result or result type, validation, and meaning.
 - Do not accept zero, duplicate, or scattered top-level model-assumptions sections. All shared and question-specific assumptions must live inside one coherent `模型假设` section and state basis, scope, effect, and failure treatment.
 - Do not select or combine named models merely to signal sophistication. Require evidence-based alternatives, applicability, limitations, rejection reasons, and a validation plan.
 - Do not fabricate data, references, experiments, performance, or citations.
@@ -183,6 +203,7 @@ Agents communicate through workspace artifacts, not hidden chat context. Keep ro
 - Decision metrics and reproducibility: `references/decision-metrics-reproducibility.md`
 - Attachments and MATLAB model rendering: `references/attachments-and-model-rendering.md`
 - First-prize paper structure and writing contract: `references/paper-structure-first-prize-writing.md`
+- Chinese paper language and reference-style calibration: `references/chinese-paper-language-style.md`
 - Incremental delivery, budgets, and retry scope: `references/incremental-delivery.md`
 - Input manifest validator: `scripts/validate_input_manifest.py`
 - Figure manifest validator: `scripts/validate_figure_manifest.py`

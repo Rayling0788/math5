@@ -1,0 +1,291 @@
+# Chinese Mathematical Modeling Paper Language Style
+
+Use this reference when writing a Chinese mathematical modeling paper, especially when the user provides a reference paper or asks for a similar academic style. Learn its transferable rhetoric and section rhythm; never copy its problem-specific wording, numbers, formulas, unsupported claims, or modeling errors.
+
+## 1. Calibrate Before Drafting
+
+Read representative passages from the supplied paper before writing the body:
+
+1. abstract;
+2. problem analysis;
+3. one complete model-building subsection;
+4. one algorithm or solution subsection;
+5. one result-analysis subsection;
+6. model evaluation or conclusion.
+
+Record a compact style profile in the Writer handoff or modeling decision log. Cover:
+
+- narrative subject: how often the paper uses `本文`、`本节` or subjectless statements;
+- section granularity: how it separates model construction, solution, results, verification, and analysis;
+- sentence length and paragraph density;
+- transition pattern: causal, conditional, progressive, contrastive, or enumerative;
+- formula framing: how formulas are introduced and interpreted;
+- representative-example pattern: whether one component is derived first and then generalized;
+- result reporting: headline value, example value, trend, and validation order;
+- evaluation tone: whether strengths and limitations name concrete evidence.
+
+Before drafting prose, turn that profile into a section-role map. For every substantive
+question, list where the draft will place `model construction`, `representative
+derivation`, `general model`, `solution procedure`, `requested result`, and `result
+analysis or verification`. This map is an internal writing aid, not part of the submitted
+paper. It prevents a writer from recognizing the reference style correctly but still
+compressing all roles into one technical-report paragraph.
+
+Do not reduce style matching to vocabulary substitution. Match the organization of reasoning at paragraph and subsection scale.
+
+## 2. Preserve The Reference Paper's Useful Rhythm
+
+For a mechanism-heavy modeling question, normally separate the following roles:
+
+1. `模型建立`: establish coordinates, objects, variables, physical relations, and constraints;
+2. `递推或分类讨论`: derive one representative component or path segment, then generalize;
+3. `模型汇总`: collect the equations, unknowns, objective, and constraints actually sent to computation;
+4. `模型求解`: state bounds, initialization, search or numerical procedure, stopping rule, and MATLAB implementation;
+5. `求解结果`: report the requested table, figure, event, optimum, or recommendation;
+6. `结果分析与检验`: explain the trend, active mechanism, error, sensitivity, and applicability.
+
+Merge roles only when the question is genuinely short. Do not compress model construction, algorithm, result, and validation into one dense paragraph merely to reduce page count.
+
+### Model-summary block
+
+After deriving one representative object and generalizing the notation, collect the final computational model in a visible `模型汇总` subsection. Use a brace, aligned equations, or a compact grouped display to separate semantic families such as `路径/几何`、`状态`、`位置递推`、`速度递推`、`目标函数` and `约束条件`. The display should let a reader see the complete solver input at a glance. Introduce the block with one sentence explaining what is being collected, then state the unknowns, known inputs, index range, and evaluation order below it.
+
+Do not imitate a reference page by copying its formulas or by forcing every equation into one oversized brace. Keep only governing relations used by the code, split the block when it would exceed one page, and retain the earlier derivation that explains why each family is valid.
+
+### Granularity lock
+
+When rewriting an existing chapter, preserve or increase the number of meaningful
+subsections until the roles above are visible. Do not replace several existing
+subsections with one polished subsection. For a mechanism-heavy question, use at least
+the following visible progression unless the supplied reference clearly uses a finer
+one:
+
+```text
+模型建立（对象、坐标与局部关系）
+模型汇总或一般递推（统一下标、目标与约束）
+模型求解（可执行算法、边界与停止准则）
+求解结果（先直接回答题问）
+结果分析与检验（解释机理、误差和适用范围）
+```
+
+A subsection title alone does not satisfy a role. Each role must contain the material
+named by the title. Figures and tables belong to the role whose inference they support;
+do not gather all figures at the end of a chapter.
+
+## 3. Build Paragraphs As Reasoning Units
+
+Each paragraph should complete one local inference. Use the following sentence-group patterns flexibly.
+
+As a practical rhythm, most modeling paragraphs should contain a short setup, one local
+relation or displayed formula, and a sentence explaining what the relation makes
+solvable. A result paragraph should first state the answer, then interpret one visible
+trend, and only then give validation. Avoid a paragraph that simultaneously introduces
+the model, describes the search, reports the optimum, and lists several residuals.
+
+### Geometric or physical setup
+
+```text
+为刻画……，在……基础上建立……坐标系，并设……为……。
+由于……始终满足……，故……之间存在如下关系：
+[formula]
+其中，……表示……；该式把……转化为……。
+```
+
+### Representative derivation and generalization
+
+```text
+以下以前一连接单元为例推导……。已知……，由……可得……。
+[formula]
+将……代入上式并求解……，即可得到……。其余单元的几何关系相同，因此统一写为……。
+```
+
+### Piecewise path or state classification
+
+```text
+把手可能位于……、……或……。三种情形的判别量分别为……。
+当……时采用……关系；当……时改用……关系。这样可保证……在连接点处连续。
+```
+
+When a local geometric schematic makes the derivation easier to see, place it beside or immediately below the relevant setup and then derive the relation it exposes. Each panel should retain the actual body or segment outline, indexed points, relevant path branch, circle center or local coordinate basis, direction arrow, and dashed construction lines used by the following cosine-law, projection, tangency, distance, or contact equation. Keep symbols identical between prose, figure, and formula. The transferable feature is the diagram's analytical content, not its monochrome scan style.
+
+Do not draw every trivial variation. Use coordinated panels for configurations whose geometry genuinely changes, and merge symmetric or algebraically identical views after showing one representative construction. The purpose is to make the derivation inspectable, not to inflate the figure count.
+
+### Algorithm and computation
+
+```text
+由前述约束可先将搜索范围缩小为……。在该区间内，先以……定位候选区间，再以……进行加密，直至……小于给定容差。
+将上述递推关系编写为 MATLAB 程序，按……顺序更新……，最终得到……。
+```
+
+### Result and interpretation
+
+```text
+计算得到……为……。其中，……时……达到……，说明……主要由……引起。
+与……相比，……变化……；进一步将……加密或扰动后，结论保持不变，因此……。
+```
+
+These are compositional patterns, not fixed templates. Vary wording to fit the actual mechanism.
+
+### Compression failure and corrected organization
+
+The following pattern is too compressed even if every sentence is correct:
+
+```text
+对约束求导得到统一递推式。随后进行全域扫描和局部优化，得到最优值，
+并通过网格加密、残差和灵敏度验证结果可靠。
+```
+
+Rewrite it by restoring the reference paper's reasoning order:
+
+```text
+先说明一个相邻单元为何满足投影相等，并推导该单元的速度关系；
+再把相同几何关系推广为统一下标递推式，说明待求量和已知量；
+另设“模型求解”，依次交代扫描区间、候选区间、局部加密和停止条件；
+另设“求解结果”，先报告题目所求值及其发生位置；
+最后在“结果分析与检验”中解释峰值形成原因，并分别给出加密、残差和敏感性证据。
+```
+
+The correction is structural, not a request to make every sentence longer.
+
+## 4. Frame Formulas Naturally
+
+Before a displayed formula, state the immediate modeling purpose or the relation from which it follows. Prefer concrete leads such as:
+
+- `由定距约束可知`;
+- `对弧长关系关于时间求导`;
+- `在该三角形中应用余弦定理`;
+- `为保证两段路径切向连续`;
+- `将实体碰撞转化为分离轴上的投影比较`.
+
+After the formula, do at least one useful thing:
+
+- define a new symbol;
+- explain its physical or geometric meaning;
+- state which variable is known and which is solved;
+- show the substitution that produces the next equation;
+- explain how MATLAB evaluates it.
+
+Do not repeatedly write `由数学知识可知`、`容易得到` or `显然`. Name the actual theorem, constraint, geometry, or derivative. Do not explain trivial algebra line by line when it adds no modeling meaning.
+
+## 5. Use Transitions With Real Dependency
+
+Words such as `首先`、`其次`、`接着`、`最后` are acceptable when they correspond to an actual dependency chain, especially in the abstract or algorithm overview. Avoid using them as empty numbering devices in every paragraph.
+
+Prefer transitions that expose logic:
+
+- cause: `由于`、`因此`、`由此`;
+- condition: `当……时`、`在……条件下`;
+- progression: `进一步`、`在此基础上`、`进而`;
+- contrast: `与……不同`、`但在……处`;
+- closure: `综上`、`至此`、`由上述递推关系`.
+
+Use `本文` when stating a modeling choice, interpretation, or algorithm design. Use subjectless statements for direct mathematical consequences. Do not begin several consecutive paragraphs with `本文` or `如图所示`.
+
+### Match the reference's lexical register
+
+The target register is a direct Chinese contest paper, not a compressed audit report.
+Prefer concrete modeling verbs such as `设`、`建立`、`由……可知`、`代入`、`联立`、
+`递推`、`求解`、`得到` and `说明`. Repeat the actual object when that makes the
+dependency clearer; do not replace every repeated noun with an abstract label.
+
+Use technical terms when they carry necessary mathematical meaning, but unpack dense
+noun phrases. In submission prose, avoid unexplained report-style expressions such as
+`规范源`、`证据共同支持`、`控制峰值`、`执行裕量`、`保持良定`、`风险包络`
+or `锁定高值区域`. For example:
+
+```text
+Too compressed: 三类证据共同支持该控制峰值，且递推保持良定。
+Preferred: 网格加密后最大值的变化小于……，速度递推中的分母始终大于……，
+因此没有出现运动学奇异，所得最大值在给定精度下保持不变。
+```
+
+Prefer one main clause for one mathematical action. A longer sentence is acceptable
+when it expresses a single cause-and-effect relation, but do not stack the model,
+algorithm, result, and verification as four comma-separated clauses. The reference may
+repeat `本文`、`因此` or the modeled object more often than polished journal prose; retain
+that explicitness when it improves the derivation, while avoiding mechanical repetition.
+
+## 6. Match Chapter-Specific Density
+
+### Abstract
+
+Begin with one compact overview. For each question, use one paragraph beginning with `针对问题一`、`针对问题二` or an equivalent phrase. Explicitly name the actual model or mathematical structure, the executed solution algorithm or numerical method, and the objective or decisive constraints before reporting one principal result and one decisive validation or interpretation. A short sequence such as `先……，再……，进而……` is appropriate when it mirrors the computation. Avoid the empty substitute `建立模型并用 MATLAB 求解`.
+
+End a Chinese abstract with one keyword line. Bold both the `关键词：` label and every keyword, using the selected contest template's separator. Do not bold arbitrary result phrases throughout the abstract merely to imitate the keyword line.
+
+### Problem analysis
+
+Keep it shorter than the derivation. State what must be found, what earlier result it depends on, the central mathematical difficulty, and the chosen route. Do not write final formulas or stack diagnostic values here.
+
+### Model construction
+
+This is the most explanatory part. Introduce objects and relations in the order needed for derivation. Derive a representative component before writing a compact general recurrence. Use figures to support a geometric relation, not merely to decorate the subsection.
+
+### Model solution
+
+Describe the executable procedure rather than repeating the formulas. State variable bounds, branch selection, traversal order, refinement rule, optimizer, stopping rule, and failure handling as applicable.
+
+### Result analysis
+
+Separate `what was obtained` from `why it behaves that way`. Report the requested result first; then explain the mechanism, compare scenarios, and give validation or sensitivity. Keep full-precision diagnostics in a compact verification paragraph or appendix.
+
+### Model evaluation
+
+Name a specific strength with its evidence, for example analytic velocity recursion avoiding integer-time differencing. Name a specific limitation with its consequence, for example neglecting vertical tilt makes the conclusion valid only for planar motion. Do not write `理论基础扎实`、`考虑范围广` or `具有推广价值` without an object and evidence.
+
+## 7. Figures, Tables, And Equations Must Belong To The Prose
+
+Before a figure or table, tell the reader what relation or comparison to inspect. After it, state the conclusion supported by the visible geometry or data. Avoid consecutive figures with only captions between them.
+
+For a geometry subsection, verify the local order `对象与条件 -> 局部构型图 -> 关系推导 -> 一般化或下一构型`. A distant overview figure does not satisfy this role when the reader must distinguish which points lie on which curve segment or which auxiliary triangle produces the equation.
+
+For a long result table, introduce its extraction rule and units, then discuss one or two representative rows or trends. Do not narrate every cell.
+
+## 8. Style Acceptance Checklist
+
+When the user explicitly asks to follow a reference paper, compare the draft against the style profile on these dimensions:
+
+1. section roles are separated at similar granularity;
+2. paragraphs advance one local inference at a time;
+3. representative derivations are generalized rather than skipped;
+4. formulas have concrete leads and useful follow-up sentences;
+5. algorithm prose mirrors the actual execution order;
+6. results are followed by mechanism and validation;
+7. transitions reflect real causal or conditional relations;
+8. the tone is academic but not filled with unsupported self-evaluation.
+
+Also compare the final draft directly with the recorded reference profile:
+
+- no required section role disappeared during polishing;
+- no paragraph carries more than one major evidence-chain transition;
+- a recurrence is not presented before at least one representative local relation is
+  explained, unless the relation is genuinely immediate;
+- the algorithm order in prose matches the executed order;
+- the requested answer appears before diagnostic detail;
+- validation is interpreted instead of being appended as a list of small residuals.
+
+If two or more of these checks fail, rewrite the chapter before compilation. Do not
+classify a clear structural mismatch as a cosmetic warning.
+
+## 9. Two-Pass Style Transformation
+
+Use two passes when the user explicitly asks to match a reference paper.
+
+**Pass 1: structural rewrite.** Build the section-role map, preserve the evidence and
+numbers, split compressed paragraphs, add the representative derivation, and put
+algorithm, result, and verification in their proper subsections. Do not spend time on
+synonym choice yet.
+
+**Pass 2: sentence and rhythm calibration.** Adjust formula lead-ins, causal and
+conditional transitions, subject use, and paragraph length to match the reference
+profile. Then compare one complete rewritten question with one complete reference
+question at subsection and paragraph scale. If they only share vocabulary, repeat Pass
+1; if they share organization but wording is stiff, repeat Pass 2.
+
+During Pass 2, perform a lexical-register scan. Replace project-management or audit-like
+abstractions with the concrete object, equation, numerical operation, or verification
+criterion used in the model. Keep established mathematical terms such as `齐次性`、
+`分离轴定理` or `运动学奇异` when they are defined and needed; the aim is clarity, not
+deliberate simplification of the mathematics.
+
+A draft that matches only vocabulary but not these reasoning structures has not matched the reference style. Correctness, evidence, and contest requirements always take precedence over stylistic imitation.

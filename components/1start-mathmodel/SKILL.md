@@ -56,6 +56,8 @@ allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetc
 论文交付轨道：附件最小盘点 -> 快速合同 -> MATLAB 最小闭环 -> 逐问真实结果 -> 论文 -> 最终验收
 严格认证轨道：高保真模型/工程认证 -> 通过后升级对应 claim；失败不阻塞无关交付
 
+图文合同：论文前部默认设置一张总体技术路线图；局部流程图仅用于真实迭代、分支、回退、多初值筛选或停止判定，并放在对应算法小节。参数化构型、真实尺寸、剖面、场和三维关系由 MATLAB 生成，纯符号局部推导可用 TikZ 正视线稿；复杂问题在代表性推导后设置“模型汇总”；摘要逐问写明模型、算法、关键约束、结果与验证，关键词标签及全部关键词统一加粗。
+
 失败策略：同一高保真门禁最多修复 2 次；局部失败只重跑 owner task；只有 blocking 输出变化才使下游 STALE。
 ```
 
@@ -114,16 +116,16 @@ allowed-tools: Bash(*), Read, Write, Edit, Grep, Glob, Agent, WebSearch, WebFetc
 | --- | --- | --- | --- |
 | 快速合同 | `2analysis-modeling` | 定义每问可执行简化层、证据等级、烟雾测试和可选高保真升级。 | `ANALYSIS_MODELING_REPORT.md` |
 | 最小闭环与逐问实现 | `3coding-visual` | 先跑统一入口和烟雾测试，再逐问生成真实结构化结果与图表。 | `code/`, `results/`, `RESULTS_REPORT.md`, `figures/` |
-| 流程与架构图绘制 | `4drawio` | 在论文确实需要时，绘制方法流程图、架构图和非数据型概念图。 | `figures/*.drawio`, `figures/*.pdf`, `DRAWIO_REPORT.md` |
-| 增量论文撰写 | `5writing` | 模板清理和非数值骨架可先行；按 accepted claim 增量填入正文。 | `paper/` |
+| 流程与架构图绘制 | `4drawio` | 默认绘制一张总体技术路线图；仅为存在真实循环、分支或停止判定且读图更清楚的局部算法补图。 | `figures/*.drawio`, `figures/*.pdf`, `figures/*.png`, `DRAWIO_REPORT.md` |
+| 增量论文撰写 | `5writing` | 模板清理和非数值骨架可先行；按 accepted claim 增量填入正文，并完成模型汇总和逐问摘要。 | `paper/` |
 | 增量与最终验收 | `6verity` | 平时只检查变更范围；交付前执行一次全量一致性与视觉验收。 | `VERIFY_REPORT.md` |
 
 这些任务不是全串行门禁。只要输入接口明确，快速计算、论文骨架和可选认证可以并行。用户发出“加快”“先完成论文”“不要深挖”后，立即停止或隔离认证轨道并重排 `todo.md`。
 
 ## 阶段边界
 
-- `3coding-visual` 负责生成所有依赖计算结果或实验输出的数据图表。
-- `4drawio` 只负责概念图、算法流程图、架构图、路线图等非数据型图示。
+- `3coding-visual` 负责生成所有依赖计算结果或模型参数的数据图表，包括真实几何、局部坐标、尺寸和约束示意图。
+- `4drawio` 只负责总体技术路线图、必要的局部算法流程图、架构图等逻辑图示。
 - 不要让 `4drawio` 重复绘制 `3coding-visual` 已经生成的统计图或数据图。
 - `5writing` 负责决定图表在论文中的位置，并按所选引擎写入图表代码：
   - Typst：`#figure(image("../../figures/xxx.pdf", width: 85%), caption: [...])`

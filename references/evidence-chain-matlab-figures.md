@@ -58,6 +58,8 @@ A panel can satisfy more than one role only when each panel has a separate manif
 
 Plan an overall roadmap and model architecture when they materially clarify dependencies. For a typical four-computation-question paper, target at least 12 core evidence units and at least 8 MATLAB-generated units when MATLAB is primary. Use evidence coverage, not raw count, as the delivery gate; document any justified reduction.
 
+Plan one overall roadmap for cross-question inputs, dependencies, models, solvers, validation, and final decisions. Do not plan one workflow diagram per question. Add a local algorithm flow only when the implemented procedure contains a genuine loop, branch, fallback, multi-start selection, or stopping decision and the diagram reduces interpretation cost compared with equations and prose. Such a diagram is an `overview` or `architecture` unit, not a substitute for mechanism, result, or validation evidence.
+
 When the user explicitly requires MATLAB, plan at least two MATLAB evidence units per computational question unless a non-computational question has no meaningful numerical view. Record the exception before coding; do not use it to excuse a missing validation figure.
 
 ## 4. Plot Selection by Model
@@ -76,6 +78,12 @@ When the user explicitly requires MATLAB, plan at least two MATLAB evidence unit
 
 Use 3D plots only when the third dimension encodes an actual variable or model output. Mark optima, constraints, critical sections, or reference planes; an unannotated surface is rarely sufficient evidence.
 
+For geometric and mechanism problems, favor a coordinated schematic that combines the true model outline, centerline or path, local basis vectors, dimension arrows, key points, and the active geometric relation. Use a second orthographic or section view when perspective hides alignment, contact, or distance. A polished schematic may use black/gray linework with one or two low-saturation accents; it must remain generated from accepted parameters and add explanatory value.
+
+For a rigid body moving on a curve, a strong mechanism figure should behave like a geometric construction: draw the computed body outline at the local pose, the active curve segment, adjacent indexed points, the junction point, the circle center or tangent reference, a direction arrow, and dashed radii/chords that form the triangle or projection used in the derivation. Keep `axis equal`, use an orthographic front view and a tight crop, and assign the strongest line weight to the body and active path. Use coordinated panels for genuinely different configurations. Do not interpret “advanced figure” as “3-D figure”; a precise 2-D construction is preferable when it reveals the equation more directly.
+
+Declare the viewing contract before drawing each geometry figure: the relation the reader must see, the preferred projection, the crop, the object that must face the reader, and the labels or dimensions that must remain unobstructed. Use front, top, side, or section views for coplanarity, tangency, contact, and distance derivations. Use perspective 3-D only when depth is part of the model; if perspective hides the decisive relation, pair it with an orthographic or sectional panel. A changed camera angle is a repair to the same evidence unit, not a new result.
+
 ## 5. MATLAB Requirements
 
 When MATLAB is selected:
@@ -90,6 +98,8 @@ When MATLAB is selected:
 - set axes labels, units, legends, colorbars, line widths, and marker sizes for the final paper size;
 - avoid large in-plot titles; use the LaTeX/Typst caption;
 - inspect the actual PDF/PNG for clipping, missing glyphs, low contrast, false perspective, overplotting, and unreadable annotations.
+
+Inspect every core figure twice: once at its exported dimensions and once rendered at the exact width used in the paper. At both sizes check Chinese, English and mathematical fonts, axes, units, legends, colorbars, arrow routing, label overlap, crop, projection, and whether the intended geometric relation is immediately visible. A technically correct figure that is not front-facing enough to expose its key relation fails visual QA.
 
 Do not accept a collection of `createfigure(input)` wrappers as a reproducible implementation. At least one entry point must start from the declared raw or prepared inputs, execute the model, calculate validation metrics, save structured results and plotting data, and then call the figure functions.
 
@@ -173,6 +183,7 @@ Block a question or final delivery when any applies:
 
 - a core claim lacks executed data or validation;
 - one of the three per-question visual roles is missing without a justified exception;
+- the paper lacks the overall roadmap when cross-question dependencies are material, or contains repetitive per-question flowcharts without genuine branching logic;
 - a MATLAB figure lacks its `.m` generator, source data, PDF, or PNG;
 - manifest paths are broken, outside the project, duplicated, or not `accepted`;
 - key numbers, units, or labels disagree across data, figure, table, and prose;

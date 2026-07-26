@@ -35,13 +35,20 @@ Required paragraph structure:
 
 Each question paragraph must contain:
 
-- the method and named model actually used;
-- the key mechanism, variable, objective, or constraint that distinguishes the approach;
+- the named model or mathematical structure actually used;
+- the solution algorithm or numerical method actually executed;
+- the key mechanism, objective, or decisive constraints that distinguish the approach;
 - at least one exact accepted result when the question is quantitative, including unit and scenario where needed;
 - the relevant validation, comparison, sensitivity, uncertainty, or feasibility conclusion;
 - the practical or mathematical meaning of the result.
 
 Avoid empty phrases such as `效果较好`、`具有一定意义` or `本文将研究`. Do not invent a number merely to satisfy the structure: for a qualitative question, state the accepted categorical result and its evidence type.
+
+## Consolidated Model Summary
+
+For every mechanism-heavy question, place a compact `模型汇总` subsection after representative derivations and before numerical solution. Group the governing relations by semantic role, for example path/geometry, state equation, recursion, objective, hard constraints, and boundary/initial conditions. Use one aligned or nested equation block when it improves scanning, with short text labels outside or beside the mathematical groups. Follow the block by stating unknowns, known inputs, index ranges, and the order in which the solver evaluates them.
+
+The summary is not a second derivation. Include only equations actually consumed by the implementation, preserve equation labels needed later, and remove intermediate identities that do not affect the solver. Do not shrink the font excessively or let a single block run beyond one page; split the summary when needed.
 
 ## Consolidated Model Assumptions
 
@@ -101,6 +108,8 @@ Final verification must fail when any of the following holds:
 - question-specific assumptions appear as separate top-level sections or material assumptions are introduced later without registration;
 - model choice is asserted without alternatives, evidence, rationale, applicability, and validation;
 - abstract results conflict with the accepted claim registry or omit required units/scenarios.
+- an abstract question paragraph fails to name the actual model, executed solution method, or decisive objective/constraints;
+- a mechanism-heavy question contains several equation families but lacks a readable model-summary subsection before numerical solution;
 - a selected interpretation silently changes the comparison object, fixed endpoints, movable boundary, parameter freedom, or cost scope;
 - comparably defensible interpretations can reverse the main answer, but the alternative is neither disclosed nor resolved by an executed scenario or sufficient analytical argument;
 - downstream values combine incompatible interpretation scenarios;
