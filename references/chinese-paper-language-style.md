@@ -91,6 +91,30 @@ Use the actual object name as often as needed. Repeating `龙头前把手`、`�
 `沿路径向后寻找`、`退回上一步`、`缩小步长` and `得到`. Replace stacked abstract
 nouns with the object, action, condition, and consequence they conceal.
 
+### Rewrite without recomputation
+
+When the user asks for a rewrite without recalculation, freeze accepted numerical claims and model meaning, not the original explanatory skeleton. Rebuild headings, paragraph roles, and derivation order when the source starts from a solver-ready equation that a reader has not yet earned. It is legitimate to add equivalent symbolic steps, a local case implied by the accepted equations, or a schematic generated from accepted parameters. It is not legitimate to change assumptions, recompute the answer, or invent a physical explanation absent from the model.
+
+Build a private solution storyline for each question before rewriting:
+
+```text
+题目要找什么
+-> 先看哪个具体对象或构型
+-> 已知什么，未知什么
+-> 哪条可见关系给出第一条方程
+-> 该式先算出什么
+-> 为什么需要下一步
+-> 怎样推广为统一模型
+-> 程序实际怎样求
+-> 结果怎样回答题目
+```
+
+Write two connected layers. The reader-facing layer explains where the model comes from with named objects, one local configuration, an auxiliary construction, projection, conservation law, or sample mechanism. The solver-facing layer then compresses the same relation into vectors, matrices, unified indices, piecewise functions, objectives, and constraints. Do not open with a decision vector or a large constraint block merely because that is what the code consumes.
+
+For geometry and mechanism problems, prefer construction before algebra. Show the relevant outline and points in a front or sectional view, add only the auxiliary lines used by the proof, state which segments are equal, parallel, perpendicular, tangent, collinear, or share a projection, and derive the elementary relation. Convert it to coordinates or vectors only after the reader can describe the construction in words. A compact vector derivation may remain when it is genuinely clearer, but it still needs a visible local object and a sentence explaining what the vector equation determines.
+
+If the accepted report and code do not support this storyline, stop the rewrite locally and request a reader-facing derivation from the modeling stage. Polished prose cannot repair a missing modeling explanation.
+
 ### Explain an algorithm as actions first
 
 Before formal pseudocode or a flowchart, give one compact natural-language pass through
@@ -114,6 +138,8 @@ code and answer:
 
 If any answer is missing, repair the local passage before polishing vocabulary. This
 check takes priority over making the prose shorter.
+
+Also hide each central displayed formula mentally and read only its neighboring prose. The prose should still identify the connected objects, the reason for the relation, the unknown it produces, and why the next calculation follows. If it says only that a named model or algorithm is used, the section remains solver-facing and fails the readability check.
 
 ## 3. Preserve The Reference Paper's Useful Rhythm
 

@@ -97,6 +97,8 @@ Introduce a formula with its modeling purpose, and follow it with its physical m
 
 Translate internal evidence records into ordinary academic Chinese. Do not expose `claim`, `accepted`, `scenario_key`, `PAPER_USABLE`, `FAILED_DIAGNOSTIC`, file paths, Agent ownership, workflow state, freezing, gates, retries, or debugging. Avoid unsupported self-evaluation such as `利用数学知识`、`理论基础扎实`、`结果合理`、`符合客观事实`、`效果较好` or `具有一定意义`; name the actual residual, comparison, constraint, sensitivity, or observed mechanism instead.
 
+For rewrite-only work, freeze accepted results rather than the old exposition. Reconstruct a reader-facing local derivation from the accepted model before presenting solver-facing vectors, unified indices, piecewise functions, objectives, or constraint sets. Equivalent symbolic steps and explanatory schematics are allowed without numerical recomputation; changing assumptions, model meaning, scenarios, or values is not. If the source artifacts cannot justify a concrete derivation, return the gap to modeling instead of preserving or polishing a formula wall.
+
 In a Chinese abstract, retain one principal answer and one decisive validation item per question. Move secondary residuals, tolerances, intermediate optima, and full-precision diagnostics to the body or appendix. If interpretations lead to different conclusions, name their conditions explicitly rather than stacking unexplained numbers.
 
 ## Blocking Acceptance Rules
@@ -110,6 +112,7 @@ Final verification must fail when any of the following holds:
 - model choice is asserted without alternatives, evidence, rationale, applicability, and validation;
 - abstract results conflict with the accepted claim registry or omit required units/scenarios.
 - an abstract question paragraph fails to name the actual model and executed solution method, or omits an objective/constraint that genuinely governs its answer;
+- a rewrite-only chapter preserves an opaque solver-first structure, or a mechanism-heavy question presents the generalized computational model before any trustworthy local object, construction, or representative derivation;
 - a mechanism-heavy question contains several equation families but lacks a readable model-summary subsection before numerical solution;
 - a selected interpretation silently changes the comparison object, fixed endpoints, movable boundary, parameter freedom, or cost scope;
 - comparably defensible interpretations can reverse the main answer, but the alternative is neither disclosed nor resolved by an executed scenario or sufficient analytical argument;

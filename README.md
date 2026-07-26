@@ -2,7 +2,7 @@
 
 面向 CUMCM、MCM/ICM、MathorCup 等数学建模竞赛的完整工作流 Skill。它以 MATLAB 建模计算和科研绘图为核心，串联题目与附件读取、模型设计、代码求解、结构化结果、论文写作、XeLaTeX/Typst 排版和最终逐页验收，并支持局部返工与按需多 Agent。
 
-当前维护版本为 `v9.0.1`，对应分支 `version/v9`。历史版本通过版本分支和 Git 标签保留。
+当前维护版本为 `v9.1.0`，对应分支 `version/v9`。历史版本通过版本分支和 Git 标签保留。
 
 ## 安装
 
@@ -21,7 +21,7 @@ git -C "$env:USERPROFILE\.codex\skills\1start-mathmodel" pull origin version/v9
 需要固定到本 README 对应版本时，可签出标签：
 
 ```powershell
-git -C "$env:USERPROFILE\.codex\skills\1start-mathmodel" checkout v9.0.1
+git -C "$env:USERPROFILE\.codex\skills\1start-mathmodel" checkout v9.1.0
 ```
 
 安装或更新后，在 Codex 新任务中输入 `$1start-mathmodel` 启动。建议先把题目、全部附件、参考论文和希望模仿的图片放入当前工作区，或在提示词中给出其完整路径。
@@ -112,7 +112,7 @@ $1start-mathmodel
 ```text
 $1start-mathmodel
 
-沿用已有 MATLAB 结果，只重写中文论文和必要图表，不重新计算已经接受的数值。摘要、正文、表格、图题和结论必须从现有结构化结果取值；修改后只重新编译论文并检查受影响页面。
+沿用已有 MATLAB 结果，只重写中文论文和必要图表，不重新计算已经接受的数值。冻结数值、单位、场景、假设和模型含义，但不要沿用原稿中难懂的小节顺序和公式墙；参照范文，从一个具体对象或局部构型开始，补出“已知什么—为什么列式—先求出什么—怎样推广—程序怎样求”的解法叙事。若现有报告和代码不足以支持推导，先补建模说明，不得编造。修改后只重新编译论文并检查受影响页面。
 ```
 
 ## 主要交付物
@@ -137,6 +137,6 @@ $1start-mathmodel
 | V6 | `version/v6` | `v6.0.0` | [math5](https://github.com/Rayling0788/math5) |
 | V7 | `version/v7` | `v7.0.0` | [math5](https://github.com/Rayling0788/math5) |
 | V8 | `version/v8` | `v8.0.0` | [math5](https://github.com/Rayling0788/math5) |
-| V9 | `version/v9` | `v9.0.1` | [math5](https://github.com/Rayling0788/math5) |
+| V9 | `version/v9` | `v9.1.0` | [math5](https://github.com/Rayling0788/math5) |
 
 Skill 入口位于仓库根目录的 `SKILL.md`；分阶段能力位于 `components/`，验证器和增量重跑工具位于 `scripts/`。
