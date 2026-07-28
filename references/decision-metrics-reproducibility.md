@@ -47,7 +47,27 @@ Every fitted relation must save source samples and report method, coordinate/sig
 
 Do not claim higher precision by averaging correlated models without a ground-truth comparison. When standards provide alternative conversions, select the applicable standard or report their spread as model uncertainty.
 
-## 5. Canonical Claim Registry
+## 5. Statistical Learning and Validation Audit
+
+Before fitting, define the independent evaluation unit: record, person, device, site, date, batch, route, or another cluster. If repeated observations share stable information, split by the highest leakage-relevant unit. A stratified record split is not a substitute for a grouped split.
+
+For every predictive or classification result, save a split audit containing group IDs, fold IDs, class counts, random seed, and train/validation/test intersections. Require all preprocessing, imputation, scaling, feature selection, resampling, hyperparameter search, model stacking, calibration, and threshold selection to be fitted inside the training portion of the appropriate fold. Stacking must use out-of-fold base-model predictions; loading a model trained on the full dataset and evaluating it on nominal validation folds is leakage, not cross-validation.
+
+Match metrics to the task and label distribution:
+
+- report the event prevalence and a naive or domain baseline;
+- for imbalanced classification, do not headline accuracy alone; include PR-AUC and recall-sensitive metrics, plus ROC-AUC when useful;
+- for probabilistic predictions, include Brier score or log loss and calibration evidence;
+- define every reported "accuracy", "success rate", "reliability", or "prediction precision" mathematically, including its evaluation unit and scenario;
+- attach grouped Bootstrap, repeated grouped folds, or another cluster-respecting uncertainty interval to material performance claims when sample size permits.
+
+Freeze one label contract before modeling. Record raw source field, blank handling, multi-label decomposition, mutually exclusive class mapping, class count, and the primary task. Reject a paper or code path whose prose, formulas, state dictionary, and output table disagree on the number or meaning of classes.
+
+Match model capacity to effective independent sample size and event count. A deep, stacked, or highly tuned model must beat a credible simpler baseline under leakage-free external or nested validation. Training curves, in-sample fit, regularization, early stopping, or a high point estimate do not establish generalization by themselves. If the complex model has no stable gain, retain the simpler model and report the negative result.
+
+Cap strong claims at the validation design. "Zero missed detections", "99% accurate", "clinical guarantee", and similar language require a clearly defined denominator and independent evidence with uncertainty; observing zero errors in a small reused sample is not a guarantee.
+
+## 6. Canonical Claim Registry
 
 Create UTF-8 `results/claim_registry.csv`:
 
@@ -59,7 +79,7 @@ Use `value_type` as `number` or `text`; use unit `1` for dimensionless numerical
 
 The Writer must use the registry as the canonical value source. The Verifier must compare abstract, body, tables, captions, conclusion, and recommendations against it. Run `scripts/validate_claim_registry.py` before writing and final delivery.
 
-## 6. MATLAB End-to-End Contract
+## 7. MATLAB End-to-End Contract
 
 Provide one documented MATLAB driver that:
 
@@ -72,7 +92,7 @@ Provide one documented MATLAB driver that:
 
 Hard-coded coordinates may illustrate a verified solution but cannot establish packing optimality. Plot scripts cannot substitute for the search/solver. Avoid manual transcription from MATLAB or Excel into LaTeX; export machine-readable tables and derive paper values from them. The appendix may show selected core code, but the complete runnable source must remain in `code/`.
 
-## 7. Blocking Failures
+## 8. Blocking Failures
 
 Block delivery when any applies:
 
@@ -81,6 +101,11 @@ Block delivery when any applies:
 - candidate identity or Top-k order differs across data, tables, prose, and recommendations;
 - a custom metric fails invariance, toy-case, or physical-target checks;
 - a fitted formula lacks source data/error diagnostics or contradicts its sign/domain convention;
+- repeated entities, sites, dates, batches, or other leakage groups cross evaluation folds without a justified independent-unit argument;
+- preprocessing, feature selection, resampling, tuning, stacking, calibration, or threshold selection consumes validation/test information;
+- an imbalanced classification claim headlines accuracy without prevalence, baseline, recall-sensitive metrics, probability scoring, and an explicit validation unit;
+- label definitions or class counts disagree across raw data mapping, formulas, code, tables, and prose;
+- a complex learner lacks a leakage-free comparison with a credible simpler baseline, or a strong performance/zero-error claim lacks independent uncertainty evidence;
 - appendix/code covers only drawings or derived snippets, not the core reported results;
 - an executable output, registry value, table value, and recommendation disagree;
 - a final recommendation violates an upstream hard bound.

@@ -124,6 +124,32 @@ def headings_inside_section(headings: list[Heading], index: int) -> list[Heading
     return result
 
 
+def section_body(text: str, headings: list[Heading], section: Heading) -> str:
+    """Return text after section heading and before the next peer/top heading."""
+    lines = text.splitlines()
+    end = len(lines)
+    for heading in headings:
+        if heading.line > section.line and heading.level <= section.level:
+            end = heading.line - 1
+            break
+    return "\n".join(lines[section.line:end])
+
+
+def count_assumption_items(text: str, engine: str) -> int:
+    """Count explicitly enumerated key assumptions without parsing full markup."""
+    if engine == "latex":
+        count = len(re.findall(r"(?m)^\s*\\item\b", text))
+    else:
+        count = len(re.findall(r"(?m)^\s*[+-]\s+\S", text))
+    if count:
+        return count
+    explicit = re.compile(
+        r"(?m)^\s*(?:假设[一二三四五六七八九十\d]+|"
+        r"[（(](?:[一二三四五六七八九十]+|\d+)[）)])"
+    )
+    return len(explicit.findall(text))
+
+
 def extract_latex_abstract(text: str) -> list[str]:
     blocks = []
     env = re.compile(
@@ -232,7 +258,26 @@ def main() -> int:
 
     assumption_sections = [h for h in all_headings if h.level == 1 and is_assumptions_title(h.title)]
     if len(assumption_sections) == 1:
-        report("PASS", "exactly one top-level model-assumptions section found")
+        section = assumption_sections[0]
+        source_text = dict(sources)[section.path]
+        body = section_body(source_text, headings_by_file[section.path], section)
+        assumption_count = count_assumption_items(body, engine)
+        if 1 <= assumption_count <= 5:
+            report(
+                "PASS",
+                "exactly one top-level model-assumptions section found; "
+                f"{assumption_count} key assumptions",
+            )
+        elif assumption_count > 5:
+            report(
+                "FAIL",
+                f"model-assumptions section has {assumption_count} key assumptions; maximum is 5",
+            )
+        else:
+            report(
+                "WARN",
+                "exactly one top-level model-assumptions section found, but explicit items could not be counted",
+            )
     else:
         report("FAIL", f"expected exactly one top-level model-assumptions section; found {len(assumption_sections)}")
 
