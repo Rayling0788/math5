@@ -45,11 +45,11 @@ These requirements define paragraph roles, not a checklist to compress into one 
 
 Avoid empty phrases such as `效果较好`、`具有一定意义` or `本文将研究`. Do not invent a number merely to satisfy the structure: for a qualitative question, state the accepted categorical result and its evidence type. Reject a paragraph if a reader cannot recover the task, model action, execution order, answer, and applicability without consulting the body.
 
-## Consolidated Model Summary
+## Adaptive Model Summary
 
-For every mechanism-heavy question, place a compact `模型汇总` subsection after representative derivations and before numerical solution. Group the governing relations by semantic role, for example path/geometry, state equation, recursion, objective, hard constraints, and boundary/initial conditions. Use one aligned or nested equation block when it improves scanning, with short text labels outside or beside the mathematical groups. Follow the block by stating unknowns, known inputs, index ranges, and the order in which the solver evaluates them.
+Classify the question before choosing a summary. A sequential derivation, single-layer estimate, or recurrence should preserve its natural calculation order and may use a generalized equation without a separate `模型汇总`. A coupled system needs a compact summary only when several variable, constraint, and objective or solution-criterion families must be viewed together to reconstruct the numerical problem. A layered model that exports one explicit quantity upstream should summarize only the downstream layer that is actually coupled.
 
-The summary is not a second derivation. Include only equations actually consumed by the implementation, preserve equation labels needed later, and remove intermediate identities that do not affect the solver. Do not shrink the font excessively or let a single block run beyond one page; split the summary when needed.
+When a summary is needed, place it after representative derivations and before numerical solution. Explain variables, constraints, and the objective or actual criterion separately first, then group only governing relations consumed by the implementation. Follow the block by stating unknowns, known inputs, index ranges, interfaces, and solver order. The summary is not a second derivation, cannot introduce new symbols, and must not exist merely to satisfy four fixed headings.
 
 ## Consolidated Model Assumptions
 

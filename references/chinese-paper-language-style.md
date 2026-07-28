@@ -143,22 +143,22 @@ Also hide each central displayed formula mentally and read only its neighboring 
 
 ## 3. Preserve The Reference Paper's Useful Rhythm
 
-For a mechanism-heavy modeling question, normally separate the following roles:
+For a mechanism-heavy modeling question, first identify whether its equations form a sequential chain or a coupled solver. Preserve the following roles, but do not force all of them into fixed headings:
 
 1. `模型建立`: establish coordinates, objects, variables, physical relations, and constraints;
 2. `递推或分类讨论`: derive one representative component or path segment, then generalize;
-3. `模型汇总`: collect the equations, unknowns, objective, and constraints actually sent to computation;
+3. `一般模型或必要的模型汇总`: use a generalized recurrence for a sequential chain; collect unknowns, objective or solution criterion, and constraints only for a coupled solver;
 4. `模型求解`: state bounds, initialization, search or numerical procedure, stopping rule, and MATLAB implementation;
 5. `求解结果`: report the requested table, figure, event, optimum, or recommendation;
 6. `结果分析与检验`: explain the trend, active mechanism, error, sensitivity, and applicability.
 
 Merge roles only when the question is genuinely short. Do not compress model construction, algorithm, result, and validation into one dense paragraph merely to reduce page count.
 
-### Model-summary block
+### Model-summary decision
 
-After deriving one representative object and generalizing the notation, collect the final computational model in a visible `模型汇总` subsection. Use a brace, aligned equations, or a compact grouped display to separate semantic families such as `路径/几何`、`状态`、`位置递推`、`速度递推`、`目标函数` and `约束条件`. The display should let a reader see the complete solver input at a glance. Introduce the block with one sentence explaining what is being collected, then state the unknowns, known inputs, index range, and evaluation order below it.
+Use a visible `模型汇总` subsection only when several variable families, constraint or equation families, and an objective or solution criterion must be read together to reconstruct the MATLAB solver input. Before the block, explain variables, constraints, and the objective or actual criterion separately. Then use a brace, aligned equations, or a compact grouped display to collect only already explained governing relations, followed by unknowns, known inputs, index range, and evaluation order.
 
-Do not imitate a reference page by copying its formulas or by forcing every equation into one oversized brace. Keep only governing relations used by the code, split the block when it would exceed one page, and retain the earlier derivation that explains why each family is valid.
+For a sequential derivation, single-layer estimate, or natural recurrence, keep the calculation chain visible and omit the summary when it would only repeat that chain. For a layered model whose upstream stage exports one probability, coefficient, state, or boundary, name the interface and summarize only the coupled downstream layer. Do not invent an objective or a `无独立目标函数` placeholder to make four headings look complete. Do not imitate a reference page by copying formulas or forcing every equation into one oversized brace.
 
 ### Granularity lock
 
@@ -393,7 +393,8 @@ Also compare the final draft directly with the recorded reference profile:
 - the requested answer appears before diagnostic detail;
 - validation is interpreted instead of being appended as a list of small residuals.
 - each complex subsection passes the reader-blockage check in Section 2;
-- a model-summary block does not replace the first concrete derivation;
+- any required model-summary block does not replace the first concrete derivation;
+- the chapter does not force a redundant summary, fabricated objective, or one-use terminology onto a sequential chain;
 - no unexplained wall of formulas or chain of abstract report nouns remains.
 
 If two or more of these checks fail, rewrite the chapter before compilation. Do not

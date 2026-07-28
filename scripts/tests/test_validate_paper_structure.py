@@ -13,6 +13,10 @@ SPEC.loader.exec_module(MODULE)
 
 
 class AssumptionCountTests(unittest.TestCase):
+    def test_validator_does_not_require_fixed_model_summary_heading(self):
+        source = SCRIPT.read_text(encoding="utf-8")
+        self.assertNotIn('"模型汇总"', source)
+
     def test_counts_latex_enumerate_items(self):
         body = "\\begin{enumerate}\n" + "\n".join(
             f"  \\item assumption {index}" for index in range(1, 6)
