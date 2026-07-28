@@ -43,7 +43,7 @@ Tasks:
 
 1. Derive the shared governing model before splitting questions when the physics or state variables are common; define bridge quantities that downstream questions may change or consume.
 2. Classify each question and scenario; list inherited quantities, new variables, invalidated assumptions, replacement submodels, applicability regime, and downstream outputs.
-3. Define symbols, units, assumptions, objectives, constraints, physical bounds, baselines, metrics, and a parameter-provenance ledger.
+3. Define symbols, units, assumptions, constraints, objectives or solution criteria, physical bounds, baselines, metrics, and a parameter-provenance ledger. For each computational question, present variables, constraints, and the objective/criterion as separate contracts before combining them into the solver model.
 4. Compare credible candidates and define a fidelity ladder. State how reduced, surrogate, analytical, numerical, literature, or experimental levels will be calibrated or cross-checked.
 5. Separate screening, hard constraints, objectives, metrics, optimization, validation, and sensitivity. Audit custom metrics and normalize multi-objective terms before weighting.
 6. Define candidate IDs, claim-registry fields, fitted-model diagnostics, weight/Pareto experiments, and result labels: strict feasible, validated estimate, scenario result, or ideal upper bound.
@@ -115,7 +115,7 @@ Tasks:
 1. Scrub all template example content immediately and compile a clean skeleton. Use only accepted claim-registry rows that pass the delivery quality floor, plus their accepted manifest rows, tables, and rendered figures.
 2. Before drafting model sections, build one `问题分析` section with a distinct subsection for every top-level question. For each question cover inputs/outputs, task essence, dependencies, difficulty, credible alternatives, selection rationale, and expected evidence without copying the prompt or pre-empting the derivation.
 3. Use exactly one top-level `模型假设` section. Keep shared and question-specific assumption groups inside it, and give every material assumption a basis, scope, effect, and failure or sensitivity treatment.
-4. Write each question in the continuous order: inherited result and attachment evidence, validity decision, alternatives and rationale, formulation, algorithm/data, executed result, validation, model-rendering evidence, and conclusion.
+4. Write each question in the continuous order: inherited result and attachment evidence, validity decision, alternatives and rationale, representative derivation, separate variable definition, separate constraints, separate objective/solution criterion, combined model summary, algorithm/data, executed result, validation, model-rendering evidence, and conclusion. Do not make the combined model the first place where these roles are explained.
 5. Use claim-evidence-interpretation paragraphs: state the claim, cite the equation/result/figure, quantify the observation, and explain its consequence.
 6. Place figures near the claims they support; explain axes, units, comparisons, extrema, and uncertainty rather than merely saying “as shown”.
 7. State the scenario key and distinguish strict feasible results, validated estimates, scenario results, and ideal upper bounds wherever readers could confuse them.
