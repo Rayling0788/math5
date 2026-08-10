@@ -9,6 +9,8 @@ description: "交付优先、支持增量重跑的多 Agent 数学建模竞赛�
 
 Base this integration on `jihe520/MathModelAgent` commit `be9c59c1aaa13c3dcb74452ea5cae11dada27589`.
 
+The evidence-preserving natural-prose pass is a mathematical-modeling adaptation informed by `blader/humanizer` commit `523374dee72d67c7b2b5f858ea0094ffda49c3ac`. Preserve its core ideas—information before shape, no invented facts, voice calibration, and cluster-based diagnosis—without importing generic hard bans that would damage technical Chinese. The evidence contract, mathematical terminology, contest format, and supplied reference style take precedence.
+
 Preserve upstream provenance under `components/`, but allow explicit local stage corrections required by this Codex integration. Keep such changes narrowly scoped and synchronize them with the role contracts, reference rules, and validators so stage instructions do not conflict.
 
 ## Execution Profile
@@ -112,6 +114,12 @@ Match reasoning structure rather than isolated phrases. Preserve factual correct
 
 For an explicit style-matching request, use a two-pass rewrite: first restore the reference's section roles and local derivation rhythm, then calibrate sentence transitions and tone. Preserve or increase meaningful subsection granularity; never collapse model construction, solution, requested result, and verification into one polished subsection. Forward-test one complete computational question after a substantial style-rule change. A forward test that only changes vocabulary or connective words fails even when its mathematics is correct.
 
+### Evidence-Preserving Natural Prose
+
+For every Chinese paper, rewrite, or substantial polish, read `references/evidence-preserving-natural-prose.md` after the structural style contract. First freeze facts, numbers, units, equations, scenarios, citations, and recommendation strength. Then remove clusters of unsupported significance, decorative analysis, vague authority, abstract-noun chains, forced symmetry, empty signposting, chatbot residue, and generic positive endings. Keep neutral technical prose, legitimate repeated terminology, real dependency transitions, and the user's defensible reference style.
+
+Use a three-pass loop: restore paragraph roles and formula handshakes; replace vague ceremony with the actual object, action, condition, and consequence; finally compare the rewrite against the canonical claims and source text for evidence drift. Automated phrase scans only nominate passages for review, except chatbot or editing residue in submission prose, which is a hard error. Never make a paper colloquial, inject personality, or alter a mathematical claim merely to sound less machine-generated.
+
 Classify each question by its actual computational structure before choosing headings. A sequential derivation, single-layer estimation, or natural recurrence that produces one next quantity at a time should follow that dependency chain and does not need a separate `模型汇总` subsection merely for symmetry. A compact summary is required only when several variable families, equation or constraint families, and a response/objective/solution criterion must be viewed together to define the system sent to MATLAB, or when the reader otherwise cannot reconstruct the coupled solver input. For a required summary, first explain variables, constraints, and the objective or actual solution criterion in distinct visible passages; the summary may use topic-specific headings but must combine only already explained relations. Never invent an objective, a constraint, or a `无独立目标函数` placeholder to fill a template. If an upstream estimator exports one explicit probability, coefficient, state, or boundary to a downstream decision layer, name that interface and summarize only the coupled layer that needs it instead of duplicating two large systems. After a required summary, state known inputs, unknown outputs, index ranges, and MATLAB execution order. The absence of four fixed headings is not itself a defect; opacity, mixed semantic roles, or forced repetition is.
 
 Each computational question used in the final paper must eventually cover three visual evidence roles:
@@ -192,6 +200,8 @@ Agents communicate through workspace artifacts, not hidden chat context. Keep ro
 - Do not allow numbers, scenario keys, candidate IDs, or recommendation wording to disagree across structured outputs, registry rows, tables, figures, abstract, body, conclusions, and recommendations.
 - Do not expose internal paths, code/report filenames, Agent/process language, retry notes, or template examples in the submission paper.
 - Do not expose evidence-management vocabulary such as `claim`, `PAPER_USABLE`, `FAILED_DIAGNOSTIC`, “冻结”, “门禁”, or scenario-registry mechanics in the submission paper; rewrite them as model assumptions, applicability conditions, numerical verification, or sensitivity conclusions.
+- Do not accept submission prose containing chatbot replies, editing instructions, unsupported significance claims, vague unnamed authorities, promotional language, or repeated decorative conclusions. Diagnose ordinary transitions and formal vocabulary in context; a single word is not a defect, but a recurring cluster that hides the modeled object or executed action must be rewritten.
+- Do not humanize by changing facts, numbers, units, formulas, symbol meanings, scenarios, citations, uncertainty, result type, or recommendation strength. Preserve technical neutrality and established terminology; natural prose is an evidence-preserving rewrite, not a creative expansion.
 - Do not describe `PAPER_USABLE` evidence as certified, construction-safe, code-compliant, experimentally verified, or universally optimal.
 - Do not accept a problem-analysis section that merges all questions into generic prose; every top-level question must have its own analysis subsection covering inputs/outputs, task essence, dependencies, difficulty, credible alternatives, selection rationale, and expected evidence.
 - Do not accept a Chinese abstract unless it has an opening overview and a separate readable prose paragraph for every top-level question. The hard content closure is `task -> executed actions -> direct answer group -> necessary scenario`; add objectives or constraints only when they decide the answer, and normally choose one validation, interpretation, or limitation for closure. An answer-changing alternative interpretation may be stated separately. Reject field checklists, algorithm-name stacks, and one-sentence registry exports.
@@ -219,6 +229,7 @@ Agents communicate through workspace artifacts, not hidden chat context. Keep ro
 - First-prize paper structure and writing contract: `references/paper-structure-first-prize-writing.md`
 - CUMCM 2026 official format contract: `references/cumcm-2026-format-contract.md`
 - Chinese paper language and reference-style calibration: `references/chinese-paper-language-style.md`
+- Evidence-preserving natural academic prose: `references/evidence-preserving-natural-prose.md`
 - Incremental delivery, budgets, and retry scope: `references/incremental-delivery.md`
 - Input manifest validator: `scripts/validate_input_manifest.py`
 - Figure manifest validator: `scripts/validate_figure_manifest.py`

@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -u
 
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+STYLE_CHECKER_FILE="${STYLE_CHECKER_FILE:-$SCRIPT_DIR/../../../scripts/check_academic_prose.py}"
+
 usage() {
   cat <<'EOF'
 Usage:
@@ -178,6 +181,7 @@ fi
 
 export PAPER_DIR ROOT_DIR MAIN_FILE SECTIONS_DIR REFERENCES_FILE FIGURES_DIR
 export RESULTS_FILE PROBLEM_ANALYSIS_FILE ALL_RESULTS_FILE NO_INTERNAL_CHECK
+export STYLE_CHECKER_FILE
 if [ "${#EXTRA_INTERNAL_TERMS[@]}" -gt 0 ]; then
   EXTRA_INTERNAL_TERMS_STR="$(printf '%s\n' "${EXTRA_INTERNAL_TERMS[@]}")"
 else
@@ -187,6 +191,7 @@ export EXTRA_INTERNAL_TERMS_STR
 
 python3 - <<'PY'
 import json
+import importlib.util
 import os
 import re
 import sys
@@ -223,6 +228,17 @@ extra_internal_terms = [
     item for item in os.environ.get("EXTRA_INTERNAL_TERMS_STR", "").splitlines()
     if item.strip()
 ]
+
+style_checker = None
+style_checker_path = Path(os.environ.get("STYLE_CHECKER_FILE", ""))
+if style_checker_path.is_file():
+    spec = importlib.util.spec_from_file_location("mathmodel_academic_prose", style_checker_path)
+    if spec and spec.loader:
+        style_checker = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = style_checker
+        spec.loader.exec_module(style_checker)
+else:
+    info("academic prose checker not found; skip natural-style phrase scan")
 
 def read(path):
     try:
@@ -455,6 +471,21 @@ for path in typ_files:
                 "unsupported self-evaluation phrase requires evidence-based rewrite in "
                 f"{path_rel}: {', '.join(vague_phrases)}"
             )
+        if style_checker:
+            style_summary = style_checker.summarize(style_checker.scan_text(text))
+            if style_summary["errors"]:
+                phrases = ", ".join(sorted({item.phrase for item in style_summary["errors"]}))
+                fail(f"chatbot/editing residue in {path_rel}: {phrases}")
+            if style_summary["clustered"]:
+                counts = style_summary["category_counts"]
+                details = ", ".join(f"{name}={count}" for name, count in sorted(counts.items()))
+                examples = ", ".join(
+                    sorted({item.phrase for item in style_summary["candidates"]})[:5]
+                )
+                warn(
+                    "templated-prose cluster requires contextual review in "
+                    f"{path_rel}: {details}; examples: {examples}"
+                )
 
     if path in section_files:
         body = text.strip()
