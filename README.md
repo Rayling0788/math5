@@ -4,26 +4,26 @@
 
 中文论文写作采用“证据锁定—自然改写—漂移复核”的保真流程：数值、单位、公式、场景和结论强度保持不变，以具体建模对象、推导动作和验证结果组织段落，同时清除聊天式修改痕迹、无来源权威和无证据拔高。该流程借鉴 `blader/humanizer` 的诊断思想并按数学建模论文重构，不机械套用英语禁词表，也不把技术文本改成口语化或人格化表达。
 
-当前维护版本为 `v9.2.0`，对应分支 `version/v9`。历史版本通过版本分支、Git 标签和 GitHub Releases 保留。
+当前维护版本为 `v10.0.0`，对应分支 `version/v10`。历史版本通过版本分支、Git 标签和 GitHub Releases 保留。
 
 ## 安装
 
 将仓库克隆到 Codex Skills 目录，并将文件夹命名为 `1start-mathmodel`：
 
 ```powershell
-git clone --branch version/v9 https://github.com/Rayling0788/math5.git "$env:USERPROFILE\.codex\skills\1start-mathmodel"
+git clone --branch version/v10 https://github.com/Rayling0788/math5.git "$env:USERPROFILE\.codex\skills\1start-mathmodel"
 ```
 
 如果该目录已经存在，请在原目录中更新：
 
 ```powershell
-git -C "$env:USERPROFILE\.codex\skills\1start-mathmodel" pull origin version/v9
+git -C "$env:USERPROFILE\.codex\skills\1start-mathmodel" pull origin version/v10
 ```
 
 需要固定到本 README 对应版本时，可签出标签：
 
 ```powershell
-git -C "$env:USERPROFILE\.codex\skills\1start-mathmodel" checkout v9.2.0
+git -C "$env:USERPROFILE\.codex\skills\1start-mathmodel" checkout v10.0.0
 ```
 
 安装或更新后，在 Codex 新任务中输入 `$1start-mathmodel` 启动。建议先把题目、全部附件、参考论文和希望模仿的图片放入当前工作区，或在提示词中给出其完整路径。
@@ -83,7 +83,7 @@ $1start-mathmodel
 
 要求：
 1. 撰写完整中文数学建模论文，使用 LaTeX 和 XeLaTeX 排版，并采用比赛要求的正式论文模板。
-2. MATLAB 负责全部建模、计算、优化、仿真、科研绘图和模型示意图，不得用手填结果或其他语言替代核心计算。
+2. MATLAB 负责全部建模、计算、优化、仿真、数据图和承担精确几何或数值证据的模型图，不得用手填结果或其他语言替代核心计算。总体/逐题技术路线和 `stage == proposed` 的概念性模型结构或机理图可按 `4drawio` 的数模工坊 image2 规则生成，但不得承担数值证据。
 3. 完整读取题目及全部附件，建立输入清单和来源台账。附件已有真实数据时，不得使用代表值、典型值或虚构数据替代；外部补充数据必须注明来源、时间、单位和适用范围。
 4. 使用按需多 Agent。只有在上游输入和任务边界明确后才启动对应 Agent，不要一次启动全部 Agent，不允许多个 Agent 同时修改同一文件。
 5. 采用增量执行和局部返工。代码、图表、文字或排版发生错误时，只重跑直接受影响的任务和页面，不得从头重跑整个流程。
@@ -140,7 +140,10 @@ $1start-mathmodel
 | V7 | `version/v7` | `v7.0.0` | [math5](https://github.com/Rayling0788/math5) |
 | V8 | `version/v8` | `v8.0.0` | [math5](https://github.com/Rayling0788/math5) |
 | V9 | `version/v9` | `v9.2.0` | [math5](https://github.com/Rayling0788/math5) |
+| V10 | `version/v10` | `v10.0.0` | [math5](https://github.com/Rayling0788/math5) |
 
 V9 小版本：`v9.0.0` 建立交付优先框架，`v9.0.1` 补充三种执行模式，`v9.1.0` 加强论文可读推导，`v9.1.1` 分离变量、约束和目标，`v9.2.0` 改为按题型自适应模型汇总，并加入反向验收以阻止机械套模板。每个标签都对应独立的 GitHub Release，可直接下载当时的 Skill 源码包。
+
+V10：`v10.0.0` 从数模工坊已恢复的 skill、前端入口和本地主程序逻辑中移植 image2 图示工作流。固定识别总体技术路线、逐题技术路线和 `stage == proposed` 的方法结构/机理图；无法直接调用 image2 时保存完整提示词并等待用户回传原始 PNG，回传后按学位论文 8.0/10 门槛验收。数据结果、验证、响应面、物理场和精确参数化几何仍必须由真实代码生成。
 
 Skill 入口位于仓库根目录的 `SKILL.md`；分阶段能力位于 `components/`，验证器和增量重跑工具位于 `scripts/`。
